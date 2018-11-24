@@ -18,7 +18,7 @@ Which creates a `<style>` tag in the document `head` with the provided id. This 
 addStyle(cssClassName, content);
 ```
 
-This takes a CSS class name and the CSS content to put into the style sheet.
+This takes a CSS class name and the CSS content to put into the style sheet. If this is different to whatever we already have stored for this item, then the new item is plopped into the DOM.
 
 ```javascript
 getNextId();
