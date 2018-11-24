@@ -1,8 +1,34 @@
 # Style Tests
 
-A POC of making a styled-components-a-like using React Context and a shared Stylesheet rendered with React DOM. The aim with an approach like this is to reduce the amount of messing around with actual DOM elements (to the correct number, which is zero, never, zilch, what's the DOM? etc)
+A POC of making a styled-components-a-like using a sort of Virtual DOM for a stylesheet. The aim with an approach like this is to reduce the amount of messing around with actual DOM elements (to the correct number, which is zero, never, zilch, what's the DOM? etc)
 
-This provides a app-level `<StyleProvider>` wrapper which provides a context for all elements to write stylesheet changes to, and a `styleWrapper` function that takes a component and a mapping of it's props to some CSS.
+There are two things in here. Firstly...
+
+## Virtual-DOM-For-Stylesheets
+
+The `Stylesheet` object. This is instantiated as follows:
+
+```javascript
+export const sheet = new Stylesheet(createStyleTag("total-styles"));
+```
+
+Which creates a `<style>` tag in the document `head` with the provided id. This has two methods:
+
+```javascript
+addStyle(cssClassName, content);
+```
+
+This takes a CSS class name and the CSS content to put into the style sheet.
+
+```javascript
+getNextId();
+```
+
+This returns a counter number to make sure each item is unique.
+
+## A weird crappy Styled-Components type thing as a demo
+
+This provides a `styleWrapper` function that takes a component and a mapping of it's props to some CSS.
 
 Here is a very basic element that allows you to change it's CSS color prop by passing a `color` prop.
 
@@ -15,7 +41,19 @@ export const Buttonino = styleWrapper(
 );
 ```
 
-You can then use it like `<Buttonino color="red">Red, yeah</Buttonino>` or even `<Buttonino color="rgb(0,255,128)">Greeny-blue-probably</Buttonino>` because this is all so low-level and hacky that there's nothing stopping you.
+You can then use it like
+
+```javascript
+<Buttonino color="red">Red, yeah</Buttonino>
+```
+
+or even
+
+```javascript
+<Buttonino color="rgb(0,255,128)">Greeny-blue-probably</Buttonino>
+```
+
+because this is all so low-level and hacky that there's nothing stopping you.
 
 ### `npm start`
 

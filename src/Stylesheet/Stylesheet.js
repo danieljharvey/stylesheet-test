@@ -2,7 +2,7 @@ import { putStyle } from "./domUtils";
 import { addItem, calcDiffs } from "./funcUtils";
 export { createStyleTag } from "./domUtils";
 
-export class SheetFace {
+export class Stylesheet {
   constructor(_stylesheet) {
     this.stylesheet = _stylesheet;
   }

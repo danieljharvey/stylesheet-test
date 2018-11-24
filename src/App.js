@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { SheetFace, createStyleTag } from "./Stylesheet/Stylesheet";
+import { Stylesheet, createStyleTag } from "./Stylesheet/Stylesheet";
 import { Buttonino } from "./Buttonino";
 
 // here is basic usage of the addStyle function to change the stylesheet
@@ -12,7 +12,7 @@ const newColours = colours => {
   return [...rest, first];
 };
 
-export const sheet = new SheetFace(createStyleTag("total-styles"));
+export const sheet = new Stylesheet(createStyleTag("total-styles"));
 
 class App extends Component {
   constructor(props) {
