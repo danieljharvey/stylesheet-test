@@ -1,6 +1,5 @@
 import React from "react";
-import "./App.css";
-import { StyleContext } from "./Stylesheet";
+import { sheet } from "../App";
 
 // this is a very crap version of an SC wrapper using context
 
@@ -15,7 +14,7 @@ export const styleWrapper = (ComponentToWrap, styleFunc) => {
       super(props);
       // generate definitely-unique-classname
       // could use a shared iterating index value in the StyleContext to make sure these are actually unique IRL
-      const cssClassName = "horse" + parseInt(Math.random() * 2000);
+      const cssClassName = "horse" + sheet.getNextId();
       this.state = {
         cssClassName,
         calculatedStyle: ""
@@ -33,12 +32,10 @@ export const styleWrapper = (ComponentToWrap, styleFunc) => {
       addStyle(this.state.cssClassName, calculatedStyle);
     }
     componentDidMount() {
-      const { addStyle } = this.context;
-      this.updateStyles(addStyle);
+      this.updateStyles(sheet.addStyle);
     }
     componentDidUpdate() {
-      const { addStyle } = this.context;
-      this.updateStyles(addStyle);
+      this.updateStyles(sheet.addStyle);
     }
     render() {
       return (
@@ -48,6 +45,5 @@ export const styleWrapper = (ComponentToWrap, styleFunc) => {
       );
     }
   }
-  Nice.contextType = StyleContext;
   return Nice;
 };

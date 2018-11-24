@@ -1,5 +1,5 @@
 import React from "react";
-import { styleWrapper } from "./StyleWrapper";
+import { styleWrapper } from "./StyleWrapper/StyleWrapper";
 
 const basicElement = props => <h1 {...props}>{props.children}</h1>;
 

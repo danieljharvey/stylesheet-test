@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { StyleProvider, StyleContext } from "./Stylesheet";
+import { SheetFace, createStyleTag } from "./Stylesheet/Stylesheet";
 import { Buttonino } from "./Buttonino";
 
 // here is basic usage of the addStyle function to change the stylesheet
@@ -11,6 +11,9 @@ const newColours = colours => {
   const [first, ...rest] = colours;
   return [...rest, first];
 };
+
+export const sheet = new SheetFace(createStyleTag("total-styles"));
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -22,35 +25,28 @@ class App extends Component {
   render() {
     const colours = this.state.colours;
     return (
-      <StyleProvider>
-        <div className="App">
-          <header className="App-header">
-            <p className="label-face">I am boring text</p>
-            <StyleContext.Consumer>
-              {({ addStyle }) => (
-                <button
-                  onClick={() =>
-                    addStyle("label-face", "color:green; font-size: 100px;")
-                  }
-                >
-                  Click me to change the stylesheet directly like some sort of
-                  hacker
-                </button>
-              )}
-            </StyleContext.Consumer>
-            <button onClick={() => this.cycleColours()}>
-              Cycle those colourful words please
-            </button>
-            <React.Fragment>
-              {colours.map((colour, i) => (
-                <Buttonino key={i} color={colour}>
-                  {colour}
-                </Buttonino>
-              ))}
-            </React.Fragment>
-          </header>
-        </div>
-      </StyleProvider>
+      <div className="App">
+        <header className="App-header">
+          <p className="label-face">I am boring text</p>
+          <button
+            onClick={() =>
+              sheet.addStyle("label-face", "color:green; font-size: 100px;")
+            }
+          >
+            Click me to change the stylesheet directly like some sort of hacker
+          </button>
+          <button onClick={() => this.cycleColours()}>
+            Cycle those colourful words please
+          </button>
+          <React.Fragment>
+            {colours.map((colour, i) => (
+              <Buttonino key={i} color={colour}>
+                {colour}
+              </Buttonino>
+            ))}
+          </React.Fragment>
+        </header>
+      </div>
     );
   }
 }
