@@ -49,7 +49,7 @@ const renderStyles = styles => {
       const content = styles[cssClassName];
       return renderStyle(cssClassName, content);
     })
-    .join();
+    .join(" ");
 };
 
 // this creates a style element from the state in the StyleProvider
